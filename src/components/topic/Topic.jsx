@@ -114,7 +114,7 @@ const Pratice = () => {
                           </Box>
                         </Link>
                         <Box display="flex" alignItems="center" gap="8px">
-                          {isPlayed && <ReviewButton onClick={() => {
+                          {isPlayed && <ReviewButton  className="btn-review" onClick={() => {
                             window.location.href = `${learningUrl}?id=${item._id}&review`;
                           }} variant="outlined">Review</ReviewButton>}
                           {!!progressText && <div className="test-progress">{progressText}</div>}
@@ -148,7 +148,7 @@ const Pratice = () => {
             </div>
             <div className="other-practice">
               <div className="title">
-                Other Pratice
+                Other Practice
               </div>
               <div className="practice-child">
                 <div className={`practice-item vocabulary ` + mapPracticeChild['vocabulary']}>
