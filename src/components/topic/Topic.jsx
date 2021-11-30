@@ -133,7 +133,7 @@ const Pratice = () => {
           <Grid item lg={3} md={3} sm={3} xs={12}>
             <div className="section">
               <div className="section-parent">
-                <div className="topic">IELTS {topic}</div>
+                <div className="topic">{appName} {topic}</div>
               </div>
               <div className="list-section">
                 {
