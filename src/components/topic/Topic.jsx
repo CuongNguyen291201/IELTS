@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Button, Box } from '@mui/material';
+import { Grid, Button, Box, Link } from '@mui/material';
 import { styled } from "@mui/material/styles";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -106,10 +106,12 @@ const Pratice = () => {
                       )
                     return (
                       <div className="test-item" key={item.topicExerciseId}>
-                        <Box display="flex" alignItems="center">
-                          {isPlayed ? <img src={CheckedIcon} alt="check-icon" className="done-topic-icon" /> : <FiberManualRecordIcon className="dot" />}
-                          <div className="name"><a href={`${learningUrl}?id=${item._id}`}>{item.name}</a></div>
-                        </Box>
+                        <Link href={`${learningUrl}?id=${item._id}`} underline="none" flex={1}>
+                          <Box display="flex" alignItems="center">
+                            {isPlayed ? <img src={CheckedIcon} alt="check-icon" className="done-topic-icon" /> : <FiberManualRecordIcon className="dot" />}
+                            <div className="name">{item.name}</div>
+                          </Box>
+                        </Link>
                         <Box display="flex" alignItems="center" gap="8px">
                           {isPlayed && <ReviewButton onClick={() => {
                             window.location.href = `${learningUrl}?id=${item._id}&review`;
@@ -177,7 +179,7 @@ const Pratice = () => {
           </Grid>
         </Grid>
       </div>
-    </div>
+    </div >
   )
 }
 

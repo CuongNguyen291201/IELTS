@@ -70,8 +70,8 @@
             font-size: 18px;
             .test-item {
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
+                justify-content: flex-start;
                 box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
                 margin-bottom: 15px;
                 padding: 7px;
@@ -81,7 +81,6 @@
                 .dot {
                     font-size: 12px;
                     color: #7e67f2;
-                    // flex: 1;
                     width: 35px;
                     @media all and (max-width: 430px) {
                         font-size: 10px;
