@@ -55,7 +55,8 @@ const Pratice = () => {
     color: "#797979",
     fontWeight: 600,
     '&:hover': {
-      border: "0.5px solid #B6B6B6"
+      border: "0.5px solid #B6B6B6",
+      color: "#797979"
     }
   })
 
