@@ -107,7 +107,7 @@ const Pratice = () => {
                       )
                     return (
                       <div className="test-item" key={item.topicExerciseId}>
-                        <Link href={`${learningUrl}?id=${item._id}`} underline="none" flex={1}>
+                        <Link style={{ color: "#29313A" }} href={`${learningUrl}?id=${item._id}`} underline="none" flex={1}>
                           <Box display="flex" alignItems="center">
                             {isPlayed ? <img src={CheckedIcon} alt="check-icon" className="done-topic-icon" /> : <FiberManualRecordIcon className="dot" />}
                             <div className="name">{item.name}</div>
