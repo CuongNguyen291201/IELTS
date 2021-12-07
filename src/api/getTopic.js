@@ -8,7 +8,7 @@ export const getTopic = async (topic, skip=0, userId) => {
         userId,
         "field": "orderIndex",
         "skip": skip,
-        "limit": 20
+        "limit": 50
     });
     return sectionTest.data.data;
 }
