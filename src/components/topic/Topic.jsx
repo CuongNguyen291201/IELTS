@@ -76,7 +76,7 @@ const Pratice = () => {
         </div>
 
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+          <Grid item sm={12} xs={12}>
             <div className="section-mb">
               <div className="section-parent">
                 <div className="topic">IELTS {topic}</div>
@@ -92,7 +92,7 @@ const Pratice = () => {
               </div>
             </div>
           </Grid>
-          <Grid item lg={9} md={9} sm={9} xs={12}>
+          <Grid item lg={9} md={9} sm={12} xs={12}>
             <div className="list-test">
               <div className="section-current">{sectionCurrent?.name}</div>
               <div className="test-detail">
@@ -131,7 +131,7 @@ const Pratice = () => {
               </div>
             </div>
           </Grid>
-          <Grid item lg={3} md={3} sm={3} xs={12}>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
             <div className="section">
               <div className="section-parent">
                 <div className="topic">{appName} {topic}</div>
@@ -148,7 +148,7 @@ const Pratice = () => {
             </div>
             <div className="other-practice">
               <div className="title">
-                Other Practice
+                Other Practices
               </div>
               <div className="practice-child">
                 <div className={`practice-item vocabulary ` + mapPracticeChild['vocabulary']}>
