@@ -14,9 +14,12 @@ const Pratice = () => {
   const [topicTest, setTopicTest] = useState();
   const [sectionCurrent, setSectionCurrent] = useState();
   const [pagination, setPagination] = useState(false);
+  const [page, setPage] = useState(10);
 
   const activeTopic = new URLSearchParams(window.location.search);
   const topic = activeTopic.get('topic');
+  const pageTopic = activeTopic.get('pageTopic');
+  // const page = activeTopic.get('page') ?? 0;
   const activeTp = !activeTopic.get('section') ? 0 : activeTopic.get('section');
   mapPracticeChild[topic] = 'active';
   const learningUrl = process.env.REACT_APP_LEARNING_URL || 'https://ielts-testpro.com/learning';
@@ -31,7 +34,7 @@ const Pratice = () => {
 
         getTopic(section[activeTp]?.topicExerciseId, 0, localUserId || undefined)
           .then((test) => {
-            if (test.length < 10) setPagination(true);
+            if (test.length < 50) setPagination(true);
             setTopicTest(test);
           })
       })
@@ -43,7 +46,7 @@ const Pratice = () => {
     getTopic(sectionCurrent?.topicExerciseId, topicTest.length, localUserId || undefined)
       .then((test) => {
         if (test) {
-          if (test.length < 10) setPagination(true);
+          if (test.length < 50) setPagination(true);
           setTopicTest([...topicTest, ...test]);
         }
       })
@@ -83,12 +86,14 @@ const Pratice = () => {
               </div>
               <div className="list-section">
                 {
-                  topicSection && topicSection.map((item, index) => (
+                  topicSection && topicSection.slice(0, page).map((item, index) => (
                     <div className={+activeTp === +index ? 'section-child section-active' : 'section-child'} key={item.topicExerciseId}>
                       <div className="section-item"><a href={`?topic=` + topic + `&section=` + index}>{item.name}</a></div>
                     </div>
                   ))
                 }
+                {topicSection.length > 10 && <Button className="section-show" onClick={() => setPage(topicSection.length)}>Show more</Button>}
+                {page > 10 && <Button className="section-show" onClick={() => setPage(10)}>Show less</Button>}
               </div>
             </div>
           </Grid>
@@ -107,14 +112,19 @@ const Pratice = () => {
                       )
                     return (
                       <div className="test-item" key={item.topicExerciseId}>
-                        <Link style={{ color: "#29313A" }} href={`${learningUrl}?id=${item._id}`} underline="none" flex={1}>
+                        <Link style={{ color: "#29313A", cursor: "pointer" }} underline="none" flex={1}
+                          onClick={() => {
+                            localStorage.setItem("_return_game_href", window.location.href);
+                            window.location.href = `${learningUrl}?id=${item._id}`;
+                          }}
+                        >
                           <Box display="flex" alignItems="center">
                             {isPlayed ? <img src={CheckedIcon} alt="check-icon" className="done-topic-icon" /> : <FiberManualRecordIcon className="dot" />}
                             <div className="name">{item.name}</div>
                           </Box>
                         </Link>
                         <Box display="flex" alignItems="center" gap="8px">
-                          {isPlayed && <ReviewButton  className="btn-review" onClick={() => {
+                          {isPlayed && <ReviewButton className="btn-review" onClick={() => {
                             window.location.href = `${learningUrl}?id=${item._id}&review`;
                           }} variant="outlined">Review</ReviewButton>}
                           {!!progressText && <div className="test-progress">{progressText}</div>}
@@ -138,12 +148,14 @@ const Pratice = () => {
               </div>
               <div className="list-section">
                 {
-                  topicSection && topicSection.map((item, index) => (
+                  topicSection && topicSection.slice(0, page).map((item, index) => (
                     <div className={+activeTp === +index ? 'section-child section-active' : 'section-child'} key={item.topicExerciseId}>
                       <div className="section-item"><a href={`?topic=` + topic + `&section=` + index}>{item.name}</a></div>
                     </div>
                   ))
                 }
+                {page === 10 && <Button className="section-show" onClick={() => setPage(topicSection.length)}>Show more</Button>}
+                {page > 10 && <Button className="section-show" onClick={() => setPage(10)}>Show less</Button>}
               </div>
             </div>
             <div className="other-practice">
@@ -153,27 +165,27 @@ const Pratice = () => {
               <div className="practice-child">
                 <div className={`practice-item vocabulary ` + mapPracticeChild['vocabulary']}>
                   <div className="name">VOCABULARY</div>
-                  <div className="btn-join"><a href="?topic=vocabulary">Join</a></div>
+                  <a className="btn-join" href="?topic=vocabulary">Join</a>
                 </div>
                 <div className={`practice-item writing ` + mapPracticeChild['writing']}>
                   <div className="name">WRITING</div>
-                  <div className="btn-join"><a href="?topic=writing">Join</a></div>
+                  <a className="btn-join" href="?topic=writing">Join</a>
                 </div>
                 <div className={`practice-item speaking ` + mapPracticeChild['speaking']}>
                   <div className="name">SPEAKING</div>
-                  <div className="btn-join"><a href="?topic=speaking">Join</a></div>
+                  <a className="btn-join" href="?topic=speaking">Join</a>
                 </div>
                 <div className={`practice-item grammar ` + mapPracticeChild['grammar']}>
                   <div className="name">GRAMMAR</div>
-                  <div className="btn-join"><a href="?topic=grammar">Join</a></div>
+                  <a className="btn-join" href="?topic=grammar">Join</a>
                 </div>
                 <div className={`practice-item reading ` + mapPracticeChild['reading']}>
                   <div className="name">READING</div>
-                  <div className="btn-join"><a href="?topic=reading">Join</a></div>
+                  <a className="btn-join" href="?topic=reading">Join</a>
                 </div>
                 <div className={`practice-item listening ` + mapPracticeChild['listening']}>
                   <div className="name">LISTENING</div>
-                  <div className="btn-join"><a href="?topic=listening">Join</a></div>
+                  <a className="btn-join" href="?topic=listening">Join</a>
                 </div>
               </div>
             </div>

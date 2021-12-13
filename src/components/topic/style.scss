@@ -205,6 +205,16 @@
                     }
                 }
             }
+            .btn-pagination-section {
+                a {
+                    color: #655ba3;
+                    text-decoration: none;
+                    text-transform: capitalize;
+                }
+            }
+            .section-show:hover {
+                color: #655ba3;
+            }
             @media all and (max-width: 1025px) {
                 padding: 15px 0;
             }
